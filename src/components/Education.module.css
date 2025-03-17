@@ -1,0 +1,158 @@
+.education {
+  padding: 8rem 2rem;
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2d3436;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(45deg, #0984e3, #6c5ce7);
+  border-radius: 2px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.degree {
+  font-size: 1.5rem;
+  color: #2d3436;
+  font-weight: 600;
+}
+
+.duration {
+  background: linear-gradient(45deg, #0984e3, #6c5ce7);
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  color: white;
+  font-weight: 500;
+}
+
+.institution {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e4e7eb;
+}
+
+.college {
+  font-size: 1.2rem;
+  color: #2d3436;
+  margin-bottom: 0.5rem;
+}
+
+.university {
+  color: #636e72;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  color: #0984e3;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.listItem {
+  position: relative;
+  padding-left: 1.5rem;
+  color: #636e72;
+  line-height: 1.6;
+}
+
+.listItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 8px;
+  height: 8px;
+  background: #0984e3;
+  border-radius: 50%;
+}
+
+.courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.course {
+  background: #f8f9fa;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  color: #2d3436;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .education {
+    padding: 6rem 1.5rem;
+  }
+
+  .card {
+    padding: 2rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .duration {
+    font-size: 0.9rem;
+  }
+
+  .courses {
+    gap: 0.8rem;
+  }
+
+  .course {
+    font-size: 0.8rem;
+  }
+}
