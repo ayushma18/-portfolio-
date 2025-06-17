@@ -5,40 +5,27 @@ const About = () => {
   return (
     <section id="about" className={styles.about}>
       <div className={styles.container}>
-        <h2 className={styles.title}>About Me</h2>
+        <h2 className={styles.title}>
+          About Me
+          <div className={styles.underline}></div>
+        </h2>
         <div className={styles.content}>
-          <div className={styles.imageContainer}>
-            <div className={styles.imageFrame}>
-              <div className={styles.imagePlaceholder}>
-                AP
-              </div>
-            </div>
-            <div className={styles.pattern}></div>
-          </div>
+          <p className={styles.quote}>
+            "I don’t give up when I fail"
+          </p>
           <div className={styles.text}>
             <p className={styles.description}>
-              I am a passionate Computer Engineering student at Pulchowk Campus, Institute of Engineering,
-              where I'm pursuing my Bachelor's degree. With a strong foundation in computer science and
-              engineering principles, I'm dedicated to exploring innovative solutions in technology.
+              Hello! I'm <strong>Ayushma</strong>, an enthusiastic Computer Engineering undergraduate with a passion for
+              exploring the endless possibilities in technology. Currently, I'm diving deep into the world
+              of <strong>Web Development</strong>, <strong>AI</strong>, and <strong>Machine Learning</strong>, constantly seeking opportunities to learn and grow.
+              My journey in tech has been enriched through active participation in hackathons and tech communities.
             </p>
-            <p className={styles.description}>
-              My academic journey at one of Nepal's most prestigious engineering institutions has equipped
-              me with both theoretical knowledge and practical skills in various aspects of computer
-              engineering, including software development, hardware design, and system architecture.
+            <p className={styles.interests}>
+              🍕 I love to watch <strong>movies</strong>, <strong>run</strong>, playing <strong>games</strong>, <strong>hiking</strong>, and <strong>trek</strong>. I love to eat <strong>pizza</strong> and <strong>momo</strong>.
             </p>
-            <div className={styles.highlights}>
-              <div className={styles.highlight}>
-                
-              </div>
-              <div className={styles.highlight}>
-                <span className={styles.highlightNumber}>10+</span>
-                <span className={styles.highlightText}>Projects</span>
-              </div>
-              <div className={styles.highlight}>
-                <span className={styles.highlightNumber}>5+</span>
-                <span className={styles.highlightText}>Awards</span>
-              </div>
-            </div>
+            <p className={styles.techInterests}>
+              My technical interests include <strong>Web Development</strong>, <strong>AI</strong>, and <strong>Machine Learning</strong>.
+            </p>
           </div>
         </div>
       </div>

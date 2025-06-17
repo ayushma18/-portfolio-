@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import styles from './Contact.module.css';
 
 const Contact = () => {
@@ -16,10 +17,52 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission logic would go here
-    alert('Thank you for your message! I will get back to you soon.');
+    
+    try {
+      // Option 1: EmailJS (requires setup at emailjs.com)
+      // Uncomment and configure when you set up EmailJS:
+      /*
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: '079bct030.ayushma@pcampus.edu.np'
+      };
+      
+      await emailjs.send(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        templateParams,
+        'YOUR_PUBLIC_KEY'
+      );
+      
+      alert('Thank you for your message! I will get back to you soon.');
+      */
+      
+      // Option 2: Mailto (currently active)
+      const subject = `Portfolio Contact: Message from ${formData.name}`;
+      const body = `
+Name: ${formData.name}
+Email: ${formData.email}
+Message: ${formData.message}
+
+---
+This message was sent from your portfolio website contact form.
+      `;
+      
+      const mailtoLink = `mailto:079bct030.ayushma@pcampus.edu.np?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoLink;
+      
+      alert('Thank you for your message! Your email client will open to send the message.');
+      
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Sorry, there was an error sending your message. Please try again or email me directly.');
+    }
+    
+    // Reset form
     setFormData({
       name: '',
       email: '',
@@ -41,19 +84,33 @@ const Contact = () => {
     {
       icon: "🔗",
       title: "LinkedIn",
-      content: "https://www.linkedin.com/in/ayushma-pudasaini-443677276/"
+      content: "https://linkedin.com/in/ayushma-pudasaini-443677276"
     },
     {
-      icon: " 📞", 
+      icon: "📞",
       title: "Phone",
       content: "+977-98282722469"
     },
     {
-      icone : " GIT",
+      icon: "👩‍💻",
       title: "Github",
       content: "https://github.com/ayushma18"
-
     },
+    {
+      icon: "📘",
+      title: "Facebook",
+      content: "https://facebook.com/ayushma.pudasaini"
+    },
+    {
+      icon: "📸",
+      title: "Instagram",
+      content: "https://www.instagram.com/ayusha.020/"
+    },
+    {
+      icon: "🎥",
+      title: "YouTube",
+      content: "https://youtube.com/@ayushmapudasaini"
+    }
   ];
 
   return (
@@ -68,7 +125,13 @@ const Contact = () => {
                 <div key={index} className={styles.infoCard}>
                   <span className={styles.icon}>{info.icon}</span>
                   <h4 className={styles.infoTitle}>{info.title}</h4>
-                  <p className={styles.infoContent}>{info.content}</p>
+                  {(info.title === "LinkedIn" || info.title === "Github" || info.title === "Facebook" || info.title === "Instagram" || info.title === "YouTube") ? (
+                    <a href={info.content} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                      {info.title}
+                    </a>
+                  ) : (
+                    <p className={styles.infoContent}>{info.content}</p>
+                  )}
                 </div>
               ))}
             </div>
