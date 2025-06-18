@@ -60,7 +60,7 @@ const NavBar = () => {
       <div className={styles.socialLinks}>
         <a href="https://youtube.com/@ayushmapoudasaini" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
         <a href="https://www.instagram.com/ayusha.020/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
-        <a href="https://linkedin.com/in/ayushma-pudasaini-443677276" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+        <a href="https://www.linkedin.com/in/ayushma-pudasaini-443677276/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
         <a href="https://github.com/ayushma18" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
       </div>
 

@@ -6,58 +6,49 @@ import styles from './Projects.module.css';
 const Projects = () => {
   const projects = [
     {
-      title: "Portfolio Website",
-      description: "A modern, responsive portfolio website built with React and Framer Motion. Features smooth animations, dynamic theming, and optimized performance.",
-      technologies: ["React", "CSS Modules", "Framer Motion", "JavaScript"],
-      githubLink: "https://github.com/ayushma18/portfolio",
-      liveLink: "#",
-      image: "/api/placeholder/400/250",
-      category: "Web Development"
-    },
-    {
-      title: "AI Chatbot",
-      description: "An intelligent chatbot using natural language processing to provide customer support and automated responses with machine learning capabilities.",
-      technologies: ["Python", "TensorFlow", "NLP", "Flask"],
-      githubLink: "https://github.com/ayushma18",
-      liveLink: "#",
-      image: "/api/placeholder/400/250",
-      category: "AI/ML"
-    },
-    {
-      title: "Task Management App",
-      description: "A full-stack task management application with user authentication, real-time updates, and collaborative features for team productivity.",
-      technologies: ["React", "Node.js", "MongoDB", "Socket.io"],
+      title: "Maze Solver",
+      description: "An intelligent maze solving application using various algorithms like A*, BFS, and DFS. Features visualization of pathfinding algorithms and interactive maze generation.",
+      technologies: ["React", "JavaScript", "Algorithms", "CSS"],
       githubLink: "https://github.com/ayushma18",
       liveLink: "#",
       image: "/api/placeholder/400/250",
       category: "Web Development"
     },
     {
-      title: "Data Visualization Dashboard",
-      description: "Interactive dashboard for data analysis and visualization using modern charting libraries and real-time data processing.",
-      technologies: ["Python", "Pandas", "Plotly", "Streamlit"],
+      title: "Employee Management System",
+      description: "A comprehensive employee management system with features for attendance tracking, payroll management, and employee records with user authentication and role-based access.",
+      technologies: ["C++", "File Handling", "OOP", "Data Structures"],
       githubLink: "https://github.com/ayushma18",
       liveLink: "#",
       image: "/api/placeholder/400/250",
-      category: "Data Science"
+      category: "Desktop Application"
     },
     {
-      title: "E-commerce Platform",
-      description: "Complete e-commerce solution with payment integration, inventory management, and responsive design for optimal user experience.",
-      technologies: ["React", "Express.js", "PostgreSQL", "Stripe"],
+      title: "Cooperative Website",
+      description: "A collaborative platform designed to facilitate community cooperation, resource sharing, and collective decision-making with modern web technologies.",
+      technologies: ["React", "Django", "Python", "JavaScript"],
       githubLink: "https://github.com/ayushma18",
       liveLink: "#",
       image: "/api/placeholder/400/250",
       category: "Web Development"
     },
     {
-      title: "Machine Learning Model",
-      description: "Predictive model for data analysis using various ML algorithms with comprehensive data preprocessing and model evaluation.",
-      technologies: ["Python", "Scikit-learn", "NumPy", "Jupyter"],
+      title: "Book Publication",
+      description: "Published research work or technical book contributing to academic or professional knowledge sharing in the field of technology and development.",
+      technologies: ["React", "Django", "Python", "Publishing"],
       githubLink: "https://github.com/ayushma18",
       liveLink: "#",
       image: "/api/placeholder/400/250",
-      category: "AI/ML"
+      category: "Publication"
+    },
+    {
+      title: "Online Quiz System",
+      description: "A comprehensive online quiz platform with user authentication, real-time scoring, question management, and detailed analytics for educational assessments.",
+      technologies: ["Django", "Python", "HTML", "CSS", "JavaScript"],
+      githubLink: "https://github.com/ayushma18",
+      liveLink: "#",
+      image: "/api/placeholder/400/250",
+      category: "Web Development"
     }
   ];
 

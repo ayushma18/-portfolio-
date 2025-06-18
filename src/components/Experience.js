@@ -1,37 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaUsers, FaTrophy, FaCode, FaLaptopCode } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaUsers, FaTrophy, FaCode, FaLaptopCode, FaHandsHelping } from 'react-icons/fa';
 import styles from './Experience.module.css';
 
 const Experience = () => {
   const experiences = [
-    {
-      type: "experience",
-      title: "Frontend Developer Intern",
-      organization: "Tech Company",
-      period: "June 2024 - August 2024",
-      description: "Developed responsive web applications using React and modern JavaScript. Collaborated with senior developers on user interface improvements and performance optimization.",
-      skills: ["React", "JavaScript", "CSS", "Git"],
-      icon: <FaLaptopCode />
-    },
-    {
-      type: "involvement",
-      title: "Web Development Lead",
-      organization: "Computer Engineering Society",
-      period: "January 2024 - Present",
-      description: "Leading a team of developers in creating websites for various college events and projects. Mentoring junior students in web development technologies.",
-      skills: ["Leadership", "Team Management", "Web Development"],
-      icon: <FaUsers />
-    },
-    {
-      type: "experience",
-      title: "Freelance Web Developer",
-      organization: "Various Clients",
-      period: "March 2023 - Present",
-      description: "Developed custom websites and web applications for local businesses. Handled full project lifecycle from client consultation to deployment and maintenance.",
-      skills: ["Full Stack Development", "Client Communication", "Project Management"],
-      icon: <FaCode />
-    },
     {
       type: "involvement",
       title: "Hackathon Participant",
@@ -48,7 +21,7 @@ const Experience = () => {
       period: "September 2022 - Present",
       description: "Volunteered in organizing tech events, workshops, and seminars. Helped in coordination and technical support for various college activities.",
       skills: ["Event Management", "Communication", "Technical Support"],
-      icon: <FaGraduationCap />
+      icon: <FaHandsHelping />
     }
   ];
 
@@ -103,7 +76,12 @@ const Experience = () => {
               
               <div className={styles.timelineContent}>
                 <div className={styles.timelineHeader}>
-                  <h3 className={styles.itemTitle}>{item.title}</h3>
+                  <h3 className={styles.itemTitle}>
+                    {item.title}
+                    {item.title === "Hackathon Participant" && (
+                      <span className={styles.inlineIcon}>{item.icon}</span>
+                    )}
+                  </h3>
                   <span className={styles.itemPeriod}>{item.period}</span>
                 </div>
                 

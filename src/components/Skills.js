@@ -7,7 +7,7 @@ const Skills = () => {
     {
       title: "Design & Front-end Development",
       icon: <FaHtml5 className={styles.icon} />,
-      skills: ["HTML", "CSS", "JavaScript", "React", "Bootstrap", "Responsive Design"]
+      skills: ["HTML", "CSS", "JavaScript", "React", "Responsive Design"]
     },
     {
       title: "Programming Languages",

@@ -42,17 +42,6 @@
   padding-bottom: 2rem;
 }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--primary-color);
-  transform: translateX(-50%);
-  z-index: 1;
-}
 
 .timelineItem {
   position: relative;
@@ -163,6 +152,14 @@
   color: var(--primary-color);
   font-family: var(--font-secondary);
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inlineIcon {
+  color: var(--accent-color);
+  font-size: 1.2rem;
 }
 
 .itemPeriod {
@@ -292,9 +289,6 @@
     margin-bottom: 3rem;
   }
   
-  .timeline::before {
-    left: 30px;
-  }
   
   .timelineItem {
     flex-direction: row !important;
