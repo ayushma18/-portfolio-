@@ -123,10 +123,18 @@ const Contact = () => {
               name="contact"
               method="POST"
               data-netlify="true"
-              action="/thank-you"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
               className="space-y-6"
             >
               <input type="hidden" name="form-name" value="contact" />
+              
+              {/* Honeypot field for spam protection */}
+              <p hidden>
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </p>
               
               <p className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
