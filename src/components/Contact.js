@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import styles from './Contact.module.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +6,8 @@ const Contact = () => {
     email: '',
     message: ''
   });
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,55 +17,23 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    const formDataToSend = new FormData();
-    formDataToSend.append('access_key', 'e57d6266-b9b4-4e3c-ae19-d60c27b9e3b5'); // Web3Forms access key
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('message', formData.message);
-    formDataToSend.append('subject', `Portfolio Contact: Message from ${formData.name}`);
-    formDataToSend.append('from_name', formData.name);
-    formDataToSend.append('to_email', '079bct030.ayushma@pcampus.edu.np');
-
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formDataToSend
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        alert('Thank you for your message! I have received it and will get back to you soon.');
-        setFormData({
-          name: '',
-          email: '',
-          message: ''
-        });
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
+  const handleSubmit = (e) => {
+    // For local development, prevent default and show success message
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      e.preventDefault();
+      setIsSubmitted(true);
       
-      // Fallback to mailto
-      const subject = `Portfolio Contact: Message from ${formData.name}`;
-      const body = `
-Name: ${formData.name}
-Email: ${formData.email}
-Message: ${formData.message}
-
----
-This message was sent from your portfolio website contact form.
-      `;
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: '', email: '', message: '' });
+      }, 3000);
       
-      const mailtoLink = `mailto:079bct030.ayushma@pcampus.edu.np?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoLink;
-      
-      alert('There was an issue sending your message directly. Your email client will open as a backup.');
+      return;
     }
+    
+    // For production (Netlify), let the form submit normally
+    // Netlify will handle the submission and redirect
   };
 
   const contactInfo = [
@@ -112,32 +80,56 @@ This message was sent from your portfolio website contact form.
   ];
 
   return (
-    <section id="contact" className={styles.contact}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Get in Touch</h2>
-        <div className={styles.content}>
-          <div className={styles.contactInfo}>
-            <h3 className={styles.subtitle}>Contact Information</h3>
-            <div className={styles.infoGrid}>
+    <section id="contact" className="min-h-screen bg-gray-50 py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Get in Touch</h2>
+        
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Contact Information */}
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-800 mb-8">Contact Information</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {contactInfo.map((info, index) => (
-                <div key={index} className={styles.infoCard}>
-                  <span className={styles.icon}>{info.icon}</span>
-                  <h4 className={styles.infoTitle}>{info.title}</h4>
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                  <span className="text-2xl mb-3 block">{info.icon}</span>
+                  <h4 className="font-semibold text-gray-800 mb-2">{info.title}</h4>
                   {(info.title === "LinkedIn" || info.title === "Github" || info.title === "Facebook" || info.title === "Instagram" || info.title === "YouTube") ? (
-                    <a href={info.content} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                    <a 
+                      href={info.content} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                    >
                       {info.title}
                     </a>
                   ) : (
-                    <p className={styles.infoContent}>{info.content}</p>
+                    <p className="text-gray-600 text-sm">{info.content}</p>
                   )}
                 </div>
               ))}
             </div>
           </div>
-          <div className={styles.formContainer}>
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <div className={styles.formGroup}>
-                <label htmlFor="name" className={styles.label}>Name</label>
+
+          {/* Netlify Contact Form */}
+          <div className="bg-white p-8 rounded-lg shadow-lg">
+            <h3 className="text-2xl font-semibold text-gray-800 mb-6">Send me a message</h3>
+            
+            {/* Netlify Forms requires a form with specific attributes */}
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              action="/thank-you"
+              onSubmit={handleSubmit}
+              className="space-y-6 max-w-md mx-auto"
+            >
+              {/* Hidden input for Netlify Forms */}
+              <input type="hidden" name="form-name" value="contact" />
+              
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  Name *
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -145,12 +137,15 @@ This message was sent from your portfolio website contact form.
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className={styles.input}
-                  placeholder="Your name"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                  placeholder="Your full name"
                 />
               </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="email" className={styles.label}>Email</label>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email *
+                </label>
                 <input
                   type="email"
                   id="email"
@@ -158,27 +153,52 @@ This message was sent from your portfolio website contact form.
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className={styles.input}
-                  placeholder="Your email"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                  placeholder="your.email@example.com"
                 />
               </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="message" className={styles.label}>Message</label>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  Message *
+                </label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className={styles.textarea}
-                  placeholder="Your message"
                   rows="5"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none resize-vertical"
+                  placeholder="Tell me about your project or just say hello..."
                 />
               </div>
-              <button type="submit" className={styles.submitBtn}>
+
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all transform hover:scale-105 active:scale-95"
+              >
                 Send Message
               </button>
             </form>
+
+            {/* Success message for local development */}
+            {isSubmitted && (
+              <div className="mt-6 p-4 bg-green-100 border border-green-300 rounded-lg">
+                <div className="flex items-center">
+                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-green-800">Message Sent Successfully!</h4>
+                    <p className="text-green-700 text-sm">This is a local development preview. On Netlify, you'll be redirected to the thank you page.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
       </div>

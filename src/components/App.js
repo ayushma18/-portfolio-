@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { FaYoutube, FaInstagram, FaLinkedin, FaGithub, FaEllipsisV, FaTimes } from 'react-icons/fa';
+import '../tailwind.css';
 import styles from './App.module.css';
 import Hero from './Hero';
 import About from './About';
