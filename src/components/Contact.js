@@ -20,28 +20,37 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    const formDataToSend = new FormData();
+    formDataToSend.append('access_key', 'e57d6266-b9b4-4e3c-ae19-d60c27b9e3b5'); // Web3Forms access key
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('message', formData.message);
+    formDataToSend.append('subject', `Portfolio Contact: Message from ${formData.name}`);
+    formDataToSend.append('from_name', formData.name);
+    formDataToSend.append('to_email', '079bct030.ayushma@pcampus.edu.np');
+
     try {
-      // Option 1: EmailJS (requires setup at emailjs.com)
-      // Uncomment and configure when you set up EmailJS:
-      /*
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-        to_email: '079bct030.ayushma@pcampus.edu.np'
-      };
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Thank you for your message! I have received it and will get back to you soon.');
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
       
-      await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
-        templateParams,
-        'YOUR_PUBLIC_KEY'
-      );
-      
-      alert('Thank you for your message! I will get back to you soon.');
-      */
-      
-      // Option 2: Mailto (currently active)
+      // Fallback to mailto
       const subject = `Portfolio Contact: Message from ${formData.name}`;
       const body = `
 Name: ${formData.name}
@@ -55,19 +64,8 @@ This message was sent from your portfolio website contact form.
       const mailtoLink = `mailto:079bct030.ayushma@pcampus.edu.np?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailtoLink;
       
-      alert('Thank you for your message! Your email client will open to send the message.');
-      
-    } catch (error) {
-      console.error('Error sending email:', error);
-      alert('Sorry, there was an error sending your message. Please try again or email me directly.');
+      alert('There was an issue sending your message directly. Your email client will open as a backup.');
     }
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
   };
 
   const contactInfo = [
