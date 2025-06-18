@@ -1,26 +1,43 @@
 import React, { useState } from 'react';
+import ThankYou from './ThankYou';
 
 const Contact = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const handleSubmit = (e) => {
     // For local development, prevent default and show success message
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       e.preventDefault();
-      setIsSubmitted(true);
-      
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        // Reset form fields
-        e.target.reset();
-      }, 3000);
-      
+      setShowThankYou(true);
+      // Reset form fields
+      e.target.reset();
       return;
     }
     
-    // For production (Netlify), let the form submit normally
-    // Netlify will handle the submission and redirect
+    // For production (Netlify), prevent default and handle submission
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(e.target);
+    
+    // Submit to Netlify
+    fetch('/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
+      setShowThankYou(true);
+      e.target.reset();
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      alert('There was an error sending your message. Please try again.');
+    });
+  };
+
+  const closeThankYou = () => {
+    setShowThankYou(false);
   };
 
   const contactInfo = [
@@ -106,7 +123,6 @@ const Contact = () => {
               name="contact"
               method="POST"
               data-netlify="true"
-              action="/thank-you"
               onSubmit={handleSubmit}
               className="space-y-6"
             >
@@ -161,28 +177,14 @@ const Contact = () => {
               </p>
             </form>
 
-            {/* Success message for local development */}
-            {isSubmitted && (
-              <div className="mt-6 p-4 bg-green-100 border border-green-300 rounded-lg">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-green-800">Message Sent Successfully!</h4>
-                    <p className="text-green-700 text-sm">This is a local development preview. On Netlify, you'll be redirected to the thank you page.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
           </div>
-        </div>
       </div>
-    </section>
-  );
+    </div>
+
+    {/* Thank You Modal */}
+    {showThankYou && <ThankYou onClose={closeThankYou} />}
+  </section>
+);
 };
 
 export default Contact;
