@@ -6,21 +6,31 @@ import styles from './Experience.module.css';
 const Experience = () => {
   const experiences = [
     {
+      type: "achievement",
+      title: "Selected for Seeds for the Future",
+      organization: "Huawei Technologies",
+      period: "2025",
+      description: "Selected for Huawei's prestigious Seeds for the Future program, recognizing excellence in technology and innovation.",
+      skills: ["Technology Innovation", "Leadership", "Global Perspective"],
+      icon: null,
+      isHuawei: true
+    },
+    {
       type: "involvement",
       title: "Hackathon Participant",
       organization: "Multiple Events",
       period: "2023 - Present",
-      description: "Active participant in various hackathons and coding competitions. Developed innovative solutions under time constraints and collaborated with diverse teams.",
-      skills: ["Problem Solving", "Team Collaboration", "Rapid Prototyping"],
+      description: "Active participant in various hackathons and coding competitions.",
+      skills: ["Problem Solving", "Team Collaboration"],
       icon: <FaTrophy />
     },
     {
       type: "involvement",
       title: "Student Volunteer",
       organization: "Pulchowk Campus",
-      period: "September 2022 - Present",
-      description: "Volunteered in organizing tech events, workshops, and seminars. Helped in coordination and technical support for various college activities.",
-      skills: ["Event Management", "Communication", "Technical Support"],
+      period: "Sep 2022 - Present",
+      description: "Volunteered in organizing tech events and workshops.",
+      skills: ["Event Management", "Communication"],
       icon: <FaHandsHelping />
     }
   ];
@@ -47,7 +57,7 @@ const Experience = () => {
   return (
     <section id="experience" className={styles.experience}>
       <div className={styles.container}>
-        <motion.h2 
+        <motion.h2
           className={styles.title}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -57,47 +67,36 @@ const Experience = () => {
           Experience & Involvement
         </motion.h2>
         
-        <motion.div 
-          className={styles.timeline}
+        <motion.div
+          className={styles.experienceRow}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {experiences.map((item, index) => (
-            <motion.div 
-              key={index} 
-              className={`${styles.timelineItem} ${styles[item.type]}`}
-              variants={itemVariants}
-            >
-              <div className={styles.timelineDot}>
-                {item.icon}
-              </div>
-              
-              <div className={styles.timelineContent}>
-                <div className={styles.timelineHeader}>
-                  <h3 className={styles.itemTitle}>
-                    {item.title}
-                    {item.title === "Hackathon Participant" && (
-                      <span className={styles.inlineIcon}>{item.icon}</span>
-                    )}
-                  </h3>
-                  <span className={styles.itemPeriod}>{item.period}</span>
-                </div>
-                
-                <h4 className={styles.itemOrganization}>{item.organization}</h4>
-                <p className={styles.itemDescription}>{item.description}</p>
-                
-                <div className={styles.skillTags}>
-                  {item.skills.map((skill, skillIndex) => (
-                    <span key={skillIndex} className={styles.skillTag}>
-                      {skill}
-                    </span>
-                  ))}
+          <div className={styles.experienceCard}>
+            <div className={styles.iconSection}>
+              <div className={styles.huaweiImageContainer}>
+                <div className={styles.huaweiPlaceholder}>
+                  HUAWEI
                 </div>
               </div>
-            </motion.div>
-          ))}
+              <div className={styles.experienceIcon}>
+                <FaTrophy />
+              </div>
+              <div className={styles.experienceIcon}>
+                <FaHandsHelping />
+              </div>
+            </div>
+            <div className={styles.contentSection}>
+              {experiences.map((item, index) => (
+                <div key={index} className={styles.experienceItem}>
+                  <h3 className={styles.experienceTitle}>{item.title}</h3>
+                  <span className={`${styles.experiencePeriod} ${styles[item.type]}`}>{item.period}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
         
         <motion.div 

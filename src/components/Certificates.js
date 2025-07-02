@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaCertificate, FaTimes, FaEye, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import styles from './Certificates.module.css';
 
 const Certificates = () => {
@@ -13,9 +13,7 @@ const Certificates = () => {
       title: "CodeIt Django Web Development Certificate",
       organization: "CodeIt",
       date: "2024",
-      description: "Comprehensive Django web development certification covering Python, Django framework, database management, and full-stack web application development.",
-      pdfPath: "/assets/codeit_certificate.pdf",
-      icon: <FaCertificate />,
+      imagePath: "/assets/codeit_certificate.pdf",
       category: "Web Development"
     }
   ];
@@ -23,10 +21,6 @@ const Certificates = () => {
   const handleViewCertificate = (certificate) => {
     setSelectedCertificate(certificate);
     setShowModal(true);
-  };
-
-  const handleOpenPDF = (pdfPath) => {
-    window.open(pdfPath, '_blank');
   };
 
   const closeModal = () => {
@@ -67,66 +61,26 @@ const Certificates = () => {
         </motion.h2>
         
         <motion.div 
-          className={styles.grid}
+          className={styles.certificateGrid}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
           {certificates.map((certificate) => (
-            <motion.div 
-              key={certificate.id} 
-              className={styles.certificateCard}
+            <motion.div
+              key={certificate.id}
+              className={styles.certificateItem}
               variants={itemVariants}
-              whileHover={{ y: -10, scale: 1.02 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
+              onClick={() => handleViewCertificate(certificate)}
             >
-              <div className={styles.cardHeader}>
-                <div className={styles.cardIcon}>
-                  {certificate.icon}
+              <div className={styles.certificateImage}>
+                <div className={styles.pdfPlaceholder}>
+                  <div className={styles.pdfIcon}>📄</div>
+                  <span>PDF Certificate</span>
                 </div>
-                <span className={styles.categoryBadge}>
-                  {certificate.category}
-                </span>
-              </div>
-              
-              <div className={styles.certificatePreview}>
-                <div className={styles.pdfIcon}>
-                  <FaCertificate />
-                </div>
-                <div className={styles.previewText}>
-                  <h4>Certificate Document</h4>
-                  <p>Click to view or download</p>
-                </div>
-              </div>
-              
-              <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>{certificate.title}</h3>
-                <h4 className={styles.cardOrganization}>{certificate.organization}</h4>
-                <p className={styles.cardDescription}>{certificate.description}</p>
-                
-                <div className={styles.cardFooter}>
-                  <span className={styles.cardDate}>{certificate.date}</span>
-                </div>
-              </div>
-              
-              <div className={styles.cardActions}>
-                <button 
-                  className={styles.viewBtn}
-                  onClick={() => handleViewCertificate(certificate)}
-                  aria-label="View Certificate"
-                >
-                  <FaEye />
-                  View Certificate
-                </button>
-                <button 
-                  className={styles.downloadBtn}
-                  onClick={() => handleOpenPDF(certificate.pdfPath)}
-                  aria-label="Open PDF"
-                >
-                  <FaExternalLinkAlt />
-                  Open PDF
-                </button>
               </div>
             </motion.div>
           ))}
@@ -148,7 +102,6 @@ const Certificates = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className={styles.modalHeader}>
-                <h3 className={styles.modalTitle}>{selectedCertificate.title}</h3>
                 <button 
                   className={styles.closeBtn}
                   onClick={closeModal}
@@ -160,46 +113,20 @@ const Certificates = () => {
               
               <div className={styles.modalBody}>
                 <iframe
-                  src={selectedCertificate.pdfPath}
+                  src={selectedCertificate.imagePath}
                   title={selectedCertificate.title}
                   className={styles.pdfViewer}
                   frameBorder="0"
                 />
               </div>
               
-              <div className={styles.modalFooter}>
-                <button 
-                  className={styles.modalDownloadBtn}
-                  onClick={() => handleOpenPDF(selectedCertificate.pdfPath)}
-                >
-                  <FaExternalLinkAlt />
-                  Open in New Tab
-                </button>
+              <div className={styles.modalTitle}>
+                <h3>{selectedCertificate.title}</h3>
+                <p>{selectedCertificate.organization} • {selectedCertificate.date}</p>
               </div>
             </motion.div>
           </motion.div>
         )}
-        
-        <motion.div 
-          className={styles.infoSection}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <div className={styles.infoCard}>
-            <div className={styles.infoIcon}>
-              <FaCertificate />
-            </div>
-            <div className={styles.infoContent}>
-              <h3 className={styles.infoTitle}>Professional Development</h3>
-              <p className={styles.infoText}>
-                Committed to continuous learning and professional growth through certified courses 
-                and training programs in cutting-edge technologies.
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
