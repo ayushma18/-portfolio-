@@ -12,6 +12,7 @@ import Education from './Education';
 import Achievements from './Achievements';
 import Certificates from './Certificates';
 import Contact from './Contact';
+import Membership from './Membership';
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -43,7 +44,7 @@ const NavBar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className={styles.logo}>Ayushma Pudasaini</div>
-      
+
       {/* Desktop Navigation */}
       <div className={styles.navCenter}>
         <a href="#home">Home</a>
@@ -53,10 +54,11 @@ const NavBar = () => {
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
         <a href="#achievements">Achievements</a>
+        <a href="#membership">Membership</a>
         <a href="#certificates">Certificates</a>
         <a href="#contact">Contact</a>
       </div>
-      
+
       {/* Desktop Social Links */}
       <div className={styles.socialLinks}>
         <a href="https://youtube.com/@ayushmapoudasaini" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
@@ -91,9 +93,10 @@ const NavBar = () => {
             <a href="#skills" onClick={closeMobileMenu}>Skills</a>
             <a href="#education" onClick={closeMobileMenu}>Education</a>
             <a href="#achievements" onClick={closeMobileMenu}>Achievements</a>
+            <a href="#membership" onClick={closeMobileMenu}>Membership</a>
             <a href="#certificates" onClick={closeMobileMenu}>Certificates</a>
             <a href="#contact" onClick={closeMobileMenu}>Contact</a>
-            
+
             <div className={styles.mobileSocialLinks}>
               <a href="https://youtube.com/@ayushmapoudasaini" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
               <a href="https://www.instagram.com/ayusha.020/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
@@ -120,6 +123,7 @@ const App = () => {
       <Skills />
       <Education />
       <Achievements />
+      <Membership />
       <Certificates />
       <Contact />
     </div>
