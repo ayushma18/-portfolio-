@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCode, FaChartLine, FaCloud, FaGitAlt, FaHtml5, FaAtom } from 'react-icons/fa';
+import { FaCode, FaChartLine, FaCloud, FaGitAlt, FaHtml5, FaAtom, FaServer, FaMicrochip, FaTools, FaBrain } from 'react-icons/fa';
 import styles from './Skills.module.css';
 
 const Skills = () => {
@@ -7,12 +7,22 @@ const Skills = () => {
     {
       title: "Design & Front-end Development",
       icon: <FaHtml5 className={styles.icon} />,
-      skills: ["HTML", "CSS", "JavaScript", "React", "Responsive Design"]
+      skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Responsive Design", "Figma (UI/UX)"]
     },
     {
       title: "Programming Languages",
       icon: <FaCode className={styles.icon} />,
-      skills: ["Python", "C", "C++"]
+      skills: ["Python", "C", "C++", "JavaScript"]
+    },
+    {
+      title: "Deep Learning & Machine Learning",
+      icon: <FaBrain className={styles.icon} />,
+      skills: ["PyTorch", "CNN", "CoAtNet", "ResNet18", "Grad-CAM", "Optuna", "Mel Spectrograms", "Domain Adaptation", "NumPy", "Pandas"]
+    },
+    {
+      title: "Backend Development",
+      icon: <FaServer className={styles.icon} />,
+      skills: ["Django", "FastAPI", "REST APIs", "Python"]
     },
     {
       title: "Cloud Platforms",
@@ -20,14 +30,19 @@ const Skills = () => {
       skills: ["Amazon Web Services", "Azure"]
     },
     {
-      title: "Version Control",
-      icon: <FaGitAlt className={styles.icon} />,
-      skills: ["Git"]
+      title: "Embedded & OS",
+      icon: <FaMicrochip className={styles.icon} />,
+      skills: ["Arduino", "Zephyr RTOS", "Microcontroller Interfacing"]
     },
     {
-      title: "Machine Learning Frameworks",
-      icon: <FaAtom className={styles.icon} />,
-      skills: ["NumPy", "Pandas"]
+      title: "Version Control",
+      icon: <FaGitAlt className={styles.icon} />,
+      skills: ["Git", "GitHub", "Open Source Contribution"]
+    },
+    {
+      title: "Tools & Others",
+      icon: <FaTools className={styles.icon} />,
+      skills: ["LaTeX", "Linux", "Jupyter Notebook", "Figma"]
     }
   ];
 
