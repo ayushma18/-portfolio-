@@ -1,76 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ayushma Pudasaini - Computer Engineering Portfolio - Pulchowk Campus">
-    <meta name="theme-color" content="#0984e3">
-    <meta name="color-scheme" content="light dark">
-    <meta property="og:title" content="Ayushma Pudasaini | Computer Engineering">
-    <meta property="og:description" content="Computer Engineering student at Pulchowk Campus, passionate about technology and innovation.">
-    <meta property="og:type" content="website">
-    
-    <title>Ayushma Pudasaini | Computer Engineer | AI/ML Enthusiast</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <style>
-        /* Prevent theme flash */
-        html {
-            visibility: hidden;
-        }
-        
-        /* Loading state */
-        #root:empty {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #root:empty::after {
-            content: "";
-            width: 50px;
-            height: 50px;
-            border: 3px solid #0984e3;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: loading 0.8s linear infinite;
-        }
-        
-        @keyframes loading {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
-        /* Theme initialization */
-        :root {
-            color-scheme: light dark;
-        }
-    </style>
+    <title>Ayushma Pudasaini — Computer Engineering & Machine Learning</title>
+    <meta
+      name="description"
+      content="Ayushma Pudasaini is a Computer Engineering undergraduate at Pulchowk Campus, IOE, Tribhuvan University, working on deep learning, model interpretability and full-stack systems."
+    />
+    <meta name="author" content="Ayushma Pudasaini" />
+    <meta name="theme-color" content="#3751ff" />
+    <meta name="color-scheme" content="light dark" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Ayushma Pudasaini — Computer Engineering & Machine Learning" />
+    <meta
+      property="og:description"
+      content="Deep learning, model interpretability and full-stack systems. Projects, skills and contact details."
+    />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233751ff'/%3E%3Ctext x='32' y='43' font-family='Segoe UI,Helvetica,Arial,sans-serif' font-size='30' font-weight='700' fill='white' text-anchor='middle'%3EAP%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <script>
-        // Handle theme initialization
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
-            document.documentElement.style.visibility = 'visible';
-        })();
+      /* Apply the saved theme before first paint so there is no flash of the
+         wrong colours. The page stays visible either way — the old build hid
+         <html> until JS ran, which left a blank page if the script failed. */
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light');
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
     </script>
-</head>
-<body>
+  </head>
+  <body>
+    <noscript>
+      This portfolio needs JavaScript enabled. You can reach Ayushma at
+      079bct030.ayushma@pcampus.edu.np.
+    </noscript>
     <div id="root"></div>
-    <noscript>You need to enable JavaScript to run this application.</noscript>
-    
-    <!-- Hidden form for Netlify Forms detection -->
+
+    <!-- Netlify detects the contact form from this static copy at deploy time. -->
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <textarea name="message"></textarea>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
     </form>
-</body>
+  </body>
 </html>

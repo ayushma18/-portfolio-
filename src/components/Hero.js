@@ -1,213 +1,110 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { FaArrowRight, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
+import { profile, socials, stats } from '../data/profile';
+import portrait from '../images/ayushma.png';
 import styles from './Hero.module.css';
-import ayushmaImage from '../images/ayushma.png';
 
-const TypewriterText = ({ text }) => {
-  const characters = text.split('');
-  
-  return (
-    <div style={{ display: 'inline-block' }}>
-      {characters.map((char, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.1,
-            delay: index * 0.05,
-          }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </div>
-  );
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
-const AnimatedButton = ({ className, href, onClick, children }) => {
-  return (
-    <motion.a
-      href={href}
-      className={className}
-      onClick={onClick}
-      whileHover={{
-        y: -2,
-        transition: { duration: 0.2, ease: "easeInOut" }
-      }}
-      whileTap={{
-        y: 0,
-        scale: 0.98,
-        transition: { duration: 0.1, ease: "easeInOut" }
-      }}
-      initial={false}
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const Hero = () => (
+  <section id="home" className={styles.hero}>
+    <div className={styles.backdrop} aria-hidden="true" />
+
+    <motion.div
+      className={styles.inner}
+      variants={container}
+      initial="hidden"
+      animate="visible"
     >
-      {children}
-    </motion.a>
-  );
-};
+      <div className={styles.content}>
+        <motion.p className={styles.location} variants={item}>
+          <FaMapMarkerAlt aria-hidden="true" />
+          {profile.location}
+        </motion.p>
 
-const Hero = () => {
-  const handleSmoothScroll = (e, targetId) => {
-    e.preventDefault();
-    const element = document.querySelector(targetId);
-    element?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  };
+        <motion.h1 className={styles.name} variants={item}>
+          {profile.name}
+        </motion.h1>
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.2,
-      },
-    },
-  };
+        <motion.p className={styles.role} variants={item}>
+          {profile.role}
+        </motion.p>
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-  };
+        <motion.p className={styles.tagline} variants={item}>
+          {profile.tagline}
+        </motion.p>
 
-  return (
-    <section className={styles.hero}>
-      <motion.div
-        className={styles.heroContainer}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className={styles.content}>
-          <motion.div className={styles.title} variants={itemVariants}>
-            <motion.span
-              className={styles.greeting}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              Hello,
-            </motion.span>
-            <motion.h1
-              className={styles.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <span>I'm </span>
-              <strong>Ayushma Pudasaini</strong>
-            </motion.h1>
-            <motion.div
-              className={styles.role}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              Computer Engineer
-            </motion.div>
-            <motion.div
-              className={styles.location}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              From Nepal
-            </motion.div>
-          </motion.div>
-          <motion.p
-            className={styles.subtitle}
-            variants={itemVariants}
-          >
-            Passionate about Web Development and Machine Learning
-          </motion.p>
-          <motion.div
-            className={styles.cta}
-            variants={itemVariants}
-          >
-            <AnimatedButton
-              href="#contact"
-              className={styles.primaryBtn}
-              onClick={(e) => handleSmoothScroll(e, '#contact')}
-            >
-              Get in Touch
-            </AnimatedButton>
-            <AnimatedButton
-              href="#about"
-              className={styles.secondaryBtn}
-              onClick={(e) => handleSmoothScroll(e, '#about')}
-            >
-              Learn More
-            </AnimatedButton>
-          </motion.div>
-        </div>
-        <motion.div
-          className={styles.photoContainer}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.6,
-            delay: 0.4,
-            type: "spring",
-            stiffness: 100
-          }}
-        >
-          <div className={styles.imageWrapper}>
-            <img
-              src={ayushmaImage}
-              alt="Ayushma's Photo"
-              className={styles.heroImage}
-            />
-            <div className={styles.imageDecoration}></div>
-          </div>
+        <motion.div className={styles.cta} variants={item}>
+          <a href="#projects" className={styles.primaryBtn}>
+            View projects
+            <FaArrowRight aria-hidden="true" />
+          </a>
+          <a href="#contact" className={styles.secondaryBtn}>
+            Get in touch
+          </a>
         </motion.div>
-      </motion.div>
-      <div className={styles.shapes}>
-        <motion.div
-          className={styles.shape1}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className={styles.shape2}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.1, 0.2],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className={styles.shape3}
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.2, 0.25, 0.2],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+
+        <motion.div className={styles.socials} variants={item}>
+          <a
+            href={socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href={socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
+          >
+            <FaLinkedin />
+          </a>
+        </motion.div>
       </div>
-    </section>
-  );
-};
+
+      <motion.div
+        className={styles.portraitWrap}
+        initial={{ opacity: 0, scale: 0.94 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className={styles.portraitFrame}>
+          <img
+            src={portrait}
+            alt={`Portrait of ${profile.name}`}
+            className={styles.portrait}
+            width="420"
+            height="480"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+
+    <motion.dl
+      className={styles.stats}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.45 }}
+    >
+      {stats.map((stat) => (
+        <div key={stat.label} className={styles.stat}>
+          <dt className={styles.statLabel}>{stat.label}</dt>
+          <dd className={styles.statValue}>{stat.value}</dd>
+        </div>
+      ))}
+    </motion.dl>
+  </section>
+);
 
 export default Hero;

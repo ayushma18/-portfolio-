@@ -1,0 +1,54 @@
+.section {
+  padding: var(--space-9) var(--space-5);
+  background: var(--bg);
+}
+
+/* Alternating band, used to separate neighbouring sections without borders. */
+.subtle {
+  background: var(--bg-subtle);
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.header {
+  max-width: 46rem;
+  margin-bottom: var(--space-7);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-500);
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-size: var(--text-3xl);
+  color: var(--text);
+}
+
+.lead {
+  margin-top: var(--space-4);
+  font-size: var(--text-lg);
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+  }
+
+  .lead {
+    font-size: var(--text-base);
+  }
+}

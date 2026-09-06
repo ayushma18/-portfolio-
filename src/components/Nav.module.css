@@ -1,0 +1,187 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: 0 var(--space-6);
+  background: transparent;
+  transition: background-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  border-bottom: 1px solid transparent;
+}
+
+/* The bar only gains a surface once the page has scrolled, so the hero
+   reads as full-bleed at the top. */
+.scrolled {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Fallback for browsers without color-mix support. */
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  .scrolled {
+    background: var(--bg);
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.logoMark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--brand-500);
+  color: #fff;
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: var(--text-base);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  margin-left: auto;
+}
+
+.links a {
+  position: relative;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: var(--space-2) 0;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.links a:hover {
+  color: var(--text);
+}
+
+.links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  border-radius: var(--radius-full);
+  background: var(--brand-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+
+.links a:hover::after,
+.links a.active::after {
+  transform: scaleX(1);
+}
+
+.links a.active {
+  color: var(--text);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: var(--space-5);
+}
+
+.iconLink {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  transition: color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.iconLink:hover {
+  color: var(--text);
+  background: var(--bg-inset);
+}
+
+.menuButton {
+  display: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3) var(--space-5) var(--space-5);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+.mobileMenu a {
+  padding: var(--space-4) 0;
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.mobileMenu a:last-child {
+  border-bottom: none;
+}
+
+.mobileMenu a.active {
+  color: var(--brand-500);
+}
+
+@media (max-width: 960px) {
+  .nav {
+    padding: 0 var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .links {
+    display: none;
+  }
+
+  .menuButton {
+    display: grid;
+  }
+
+  .actions {
+    margin-left: auto;
+  }
+
+  .logoText {
+    display: none;
+  }
+}

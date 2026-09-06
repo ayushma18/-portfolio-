@@ -1,75 +1,51 @@
 import React from 'react';
-import { FaCode, FaChartLine, FaCloud, FaGitAlt, FaHtml5, FaAtom, FaServer, FaMicrochip, FaTools, FaBrain } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { skillGroups } from '../data/profile';
+import Icon from './icons';
+import Section from './Section';
 import styles from './Skills.module.css';
 
-const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Design & Front-end Development",
-      icon: <FaHtml5 className={styles.icon} />,
-      skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Responsive Design", "Figma (UI/UX)"]
-    },
-    {
-      title: "Programming Languages",
-      icon: <FaCode className={styles.icon} />,
-      skills: ["Python", "C", "C++", "JavaScript"]
-    },
-    {
-      title: "Deep Learning & Machine Learning",
-      icon: <FaBrain className={styles.icon} />,
-      skills: ["PyTorch", "CNN", "CoAtNet", "ResNet18", "Grad-CAM", "Optuna", "Mel Spectrograms", "Domain Adaptation", "NumPy", "Pandas"]
-    },
-    {
-      title: "Backend Development",
-      icon: <FaServer className={styles.icon} />,
-      skills: ["Django", "FastAPI", "REST APIs", "Python"]
-    },
-    {
-      title: "Cloud Platforms",
-      icon: <FaCloud className={styles.icon} />,
-      skills: ["Amazon Web Services", "Azure"]
-    },
-    {
-      title: "Embedded & OS",
-      icon: <FaMicrochip className={styles.icon} />,
-      skills: ["Arduino", "Zephyr RTOS", "Microcontroller Interfacing"]
-    },
-    {
-      title: "Version Control",
-      icon: <FaGitAlt className={styles.icon} />,
-      skills: ["Git", "GitHub", "Open Source Contribution"]
-    },
-    {
-      title: "Tools & Others",
-      icon: <FaTools className={styles.icon} />,
-      skills: ["LaTeX", "Linux", "Jupyter Notebook", "Figma"]
-    }
-  ];
-
-  return (
-    <section id="skills" className={styles.skills}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Technical Skills</h2>
-        <div className={styles.grid}>
-          {skillCategories.map((category, index) => (
-            <div key={index} className={styles.card}>
-              <div className={styles.cardHeader}>
-                {category.icon}
-                <h3 className={styles.categoryTitle}>{category.title}</h3>
-              </div>
-              <ul className={styles.skillsList}>
-                {category.skills.map((skill, skillIndex) => (
-                  <li key={skillIndex} className={styles.skillItem}>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+const Skills = () => (
+  <Section
+    id="skills"
+    tone="subtle"
+    eyebrow="Toolkit"
+    title="Skills"
+    lead="Tools I have used to ship something real, grouped by where they sit in the stack."
+  >
+    <motion.div
+      className={styles.grid}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-80px' }}
+      variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
+    >
+      {skillGroups.map((group) => (
+        <motion.div
+          key={group.title}
+          className={styles.card}
+          variants={{
+            hidden: { opacity: 0, y: 16 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+          }}
+        >
+          <div className={styles.header}>
+            <span className={styles.icon}>
+              <Icon name={group.icon} />
+            </span>
+            <h3 className={styles.groupTitle}>{group.title}</h3>
+          </div>
+          <ul className={styles.list}>
+            {group.skills.map((skill) => (
+              <li key={skill} className={styles.skill}>
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      ))}
+    </motion.div>
+  </Section>
+);
 
 export default Skills;
