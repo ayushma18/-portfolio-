@@ -1,0 +1,12 @@
+.bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--marker);
+  transform-origin: left center;
+  /* scaleX starts at 0; the element is decorative so an unrun animation simply
+     means no bar, never missing content. */
+  transform: scaleX(0);
+}

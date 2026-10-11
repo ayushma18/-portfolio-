@@ -1,75 +1,53 @@
 .layout {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: var(--space-6);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: var(--space-8);
   align-items: start;
 }
 
+/* Channels ----------------------------------------------------------------- */
+
 .channels {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+  border-top: 1px solid var(--rule-strong);
 }
 
 .channel {
-  display: block;
-}
-
-.channelLink {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-4);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--dur) var(--ease),
-    transform var(--dur) var(--ease);
-}
-
-a.channelLink:hover {
-  border-color: var(--brand-500);
-  transform: translateX(3px);
-}
-
-.channelIcon {
   display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--brand-500) 12%, transparent);
-  color: var(--brand-500);
-  font-size: 1rem;
-}
-
-.channelText {
-  min-width: 0;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: baseline;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--rule);
 }
 
 .channelLabel {
-  display: block;
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-faint);
+  color: var(--ink-faint);
 }
 
 .channelValue {
-  display: block;
   font-size: var(--text-sm);
-  color: var(--text);
-  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-.formCard {
-  padding: var(--space-6);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+.channelLink {
+  display: inline-block;
+  min-height: 44px;
+  line-height: 44px;
+  box-shadow: inset 0 -1px 0 var(--rule-strong);
+  transition: color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
+
+.channelLink:hover {
+  color: var(--marker);
+  box-shadow: inset 0 -1px 0 var(--marker);
+}
+
+/* Form --------------------------------------------------------------------- */
 
 .form {
   display: flex;
@@ -84,21 +62,24 @@ a.channelLink:hover {
 }
 
 .field label {
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
+/* Underlined fields rather than boxes — closer to a form on paper. */
 .field input,
 .field textarea {
-  padding: var(--space-3) var(--space-4);
-  background: var(--bg);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  color: var(--text);
-  font-size: var(--text-sm);
-  transition: border-color var(--dur-fast) var(--ease),
-    box-shadow var(--dur-fast) var(--ease);
+  width: 100%;
+  padding: var(--space-3) 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--rule-strong);
+  font-size: var(--text-base);
+  transition: border-color var(--dur) var(--ease);
 }
 
 .field textarea {
@@ -106,16 +87,13 @@ a.channelLink:hover {
   min-height: 7rem;
 }
 
-.field input::placeholder,
-.field textarea::placeholder {
-  color: var(--text-faint);
-}
-
+/* The focus ring is replaced, never removed: the rule thickens and takes the
+   marker colour, which is visible without relying on the outline. */
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--brand-500);
-  box-shadow: 0 0 0 3px var(--ring);
+  border-bottom-color: var(--marker);
+  box-shadow: 0 1px 0 var(--marker);
 }
 
 .honeypot {
@@ -128,83 +106,95 @@ a.channelLink:hover {
 }
 
 .submit {
-  padding: var(--space-3) var(--space-5);
-  border-radius: var(--radius-md);
-  background: var(--brand-500);
-  color: var(--text-on-brand);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  transition: background-color var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0 var(--space-6);
+  background: var(--ink);
+  color: var(--on-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  transition: background-color var(--dur) var(--ease);
 }
 
 .submit:hover:not(:disabled) {
-  background: var(--brand-600);
-  transform: translateY(-2px);
+  background: var(--marker);
+  color: var(--on-marker);
 }
 
 .submit:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
   cursor: not-allowed;
 }
 
 .error {
   padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, #dc2626 12%, transparent);
-  color: #b91c1c;
+  border-left: 2px solid var(--marker);
+  background: var(--marker-wash);
+  color: var(--marker-deep);
   font-size: var(--text-sm);
 }
 
 .error a {
-  text-decoration: underline;
-  overflow-wrap: anywhere;
+  box-shadow: inset 0 -1px 0 currentColor;
 }
 
-:root[data-theme='dark'] .error {
-  color: #fca5a5;
-}
+/* Success ------------------------------------------------------------------ */
 
 .success {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-6) var(--space-4);
-  text-align: center;
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--rule-strong);
 }
 
-.successIcon {
-  font-size: 2.5rem;
-  color: #16a34a;
+.successLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--marker);
+  margin-bottom: var(--space-3);
 }
 
 .successTitle {
   font-size: var(--text-xl);
-  color: var(--text);
+  font-variation-settings: 'opsz' 40;
 }
 
 .successBody {
-  color: var(--text-muted);
-  font-size: var(--text-sm);
+  margin-top: var(--space-2);
+  color: var(--ink-muted);
 }
 
 .linkButton {
-  margin-top: var(--space-2);
-  color: var(--brand-500);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  text-decoration: underline;
+  min-height: 44px;
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink);
+  box-shadow: inset 0 -1px 0 var(--rule-strong);
 }
 
-@media (max-width: 900px) {
+.linkButton:hover {
+  color: var(--marker);
+  box-shadow: inset 0 -1px 0 var(--marker);
+}
+
+@media (max-width: 860px) {
   .layout {
     grid-template-columns: 1fr;
+    gap: var(--space-7);
   }
 }
 
-@media (max-width: 640px) {
-  .formCard {
-    padding: var(--space-5);
+@media (max-width: 420px) {
+  .channel {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
   }
 }

@@ -1,25 +1,38 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import styles from './Section.module.css';
 
 /**
- * Every section on the page uses this shell, so headings, spacing and the
- * alternating background rhythm stay identical throughout the site.
+ * The shell every section shares. The page is organised like a printed
+ * document: each section is announced by a numbered rule, with its label in
+ * the left rail and the title set against it on the right.
+ *
+ * `index` is the section's printed number ("01"). It is passed in from App
+ * rather than derived, so the running order stays visible in one file.
+ *
+ * Nothing here animates on scroll. A reveal-on-scroll would mean every section
+ * starts invisible and depends on JavaScript to become readable, and the
+ * effect is the house style of every generated portfolio. Printed matter does
+ * not fade in.
  */
-const Section = ({ id, eyebrow, title, lead, tone = 'default', children }) => (
+const Section = ({ id, index, eyebrow, title, lead, tone = 'default', children }) => (
   <section id={id} className={`${styles.section} ${styles[tone]}`}>
     <div className={styles.container}>
-      <motion.header
-        className={styles.header}
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true, margin: '-80px' }}
-      >
-        {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
-        <h2 className={styles.title}>{title}</h2>
-        {lead && <p className={styles.lead}>{lead}</p>}
-      </motion.header>
+      <header className={styles.header}>
+        <span className={styles.rule} aria-hidden="true" />
+
+        <div className={styles.headRow}>
+          <p className={styles.rail}>
+            <span className={styles.index}>{index}</span>
+            {eyebrow && <span className={styles.eyebrow}>{eyebrow}</span>}
+          </p>
+
+          <div className={styles.headText}>
+            <h2 className={styles.title}>{title}</h2>
+            {lead && <p className={styles.lead}>{lead}</p>}
+          </div>
+        </div>
+      </header>
+
       {children}
     </div>
   </section>

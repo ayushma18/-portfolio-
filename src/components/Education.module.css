@@ -1,166 +1,126 @@
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+  border-top: 1px solid var(--rule-strong);
 }
 
-.card {
+.entry {
   display: grid;
-  grid-template-columns: 64px 1fr auto;
-  gap: var(--space-5);
-  align-items: center;
-  padding: var(--space-5);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--dur) var(--ease),
-    transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--rule);
 }
 
-.card:hover {
-  border-color: var(--brand-500);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
-
-.logoBox {
-  display: grid;
-  place-items: center;
-  width: 64px;
-  height: 64px;
-  padding: var(--space-2);
-  border-radius: var(--radius-md);
-  background: #fff;
-  border: 1px solid var(--border);
-}
-
-.logo {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.details {
-  min-width: 0;
+.period {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.35rem;
 }
 
 .degree {
-  font-size: var(--text-lg);
-  color: var(--text);
+  font-size: var(--text-xl);
+  font-variation-settings: 'opsz' 40;
 }
 
 .institution {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin-top: var(--space-1);
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  transition: color var(--dur-fast) var(--ease);
+  margin-top: var(--space-2);
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--marker-deep);
+  transition: color var(--dur) var(--ease);
 }
 
 .institution svg {
-  font-size: 0.7em;
-  opacity: 0.6;
+  width: 0.7em;
+  height: 0.7em;
 }
 
 .institution:hover {
-  color: var(--brand-500);
+  color: var(--marker);
 }
 
 .note {
-  margin-top: var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--text-faint);
+  color: var(--ink-faint);
 }
 
-.period {
-  padding: var(--space-1) var(--space-4);
-  border-radius: var(--radius-full);
-  background: color-mix(in srgb, var(--brand-500) 12%, transparent);
-  color: var(--brand-500);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  white-space: nowrap;
-}
+/* Affiliations ------------------------------------------------------------- */
 
 .subheading {
   margin: var(--space-7) 0 var(--space-4);
-  font-size: var(--text-base);
-  color: var(--text-muted);
   font-family: var(--font-mono);
+  font-size: var(--text-xs);
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 .affiliations {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-4);
 }
 
 .affiliation {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-4);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--dur) var(--ease),
-    transform var(--dur) var(--ease);
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--rule-strong);
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
 .affiliation:hover {
-  border-color: var(--brand-500);
-  transform: translateY(-3px);
+  border-color: var(--marker);
+  color: var(--marker);
 }
 
-/* Text badge rather than a remote logo — the previous build pulled these
-   from expiring CDN URLs that eventually 404. */
 .monogram {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
-  color: #fff;
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  color: var(--marker);
+}
+
+.affiliationText {
+  display: flex;
+  flex-direction: column;
 }
 
 .affiliationName {
-  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
   font-weight: 600;
-  color: var(--text);
 }
 
 .affiliationRole {
-  display: block;
-  font-size: var(--text-sm);
-  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
 }
 
-@media (max-width: 640px) {
-  .card {
-    grid-template-columns: 52px 1fr;
-    gap: var(--space-4);
-  }
-
-  .logoBox {
-    width: 52px;
-    height: 52px;
+@media (max-width: 760px) {
+  .entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
   }
 
   .period {
-    grid-column: 1 / -1;
-    justify-self: start;
+    padding-top: 0;
   }
 }

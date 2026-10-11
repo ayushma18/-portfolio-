@@ -10,7 +10,8 @@
       content="Ayushma Pudasaini is a Computer Engineering undergraduate at Pulchowk Campus, IOE, Tribhuvan University, working on deep learning, model interpretability and full-stack systems."
     />
     <meta name="author" content="Ayushma Pudasaini" />
-    <meta name="theme-color" content="#3751ff" />
+    <meta name="theme-color" content="#f5f1e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131210" media="(prefers-color-scheme: dark)" />
     <meta name="color-scheme" content="light dark" />
 
     <meta property="og:type" content="profile" />
@@ -21,27 +22,42 @@
     />
     <meta name="twitter:card" content="summary" />
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233751ff'/%3E%3Ctext x='32' y='43' font-family='Segoe UI,Helvetica,Arial,sans-serif' font-size='30' font-weight='700' fill='white' text-anchor='middle'%3EAP%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f5f1e8'/%3E%3Ctext x='32' y='40' font-family='Georgia,serif' font-size='30' font-weight='600' fill='%23191712' text-anchor='middle'%3EA%3C/text%3E%3Crect x='18' y='48' width='28' height='3' fill='%23b0451c'/%3E%3C/svg%3E" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
     <script>
-      /* Apply the saved theme before first paint so there is no flash of the
-         wrong colours. The page stays visible either way — the old build hid
-         <html> until JS ran, which left a blank page if the script failed. */
+      /* Apply saved preferences before first paint so there is no flash of the
+         wrong theme, accent or background. This mirrors applySettings() in
+         src/theme/settings.js; keep the two in step. The page stays visible
+         whatever happens here — nothing is hidden waiting on script. */
       (function () {
+        var d = { theme: 'auto', accent: 'rust', backdrop: 'grain', cursor: 'crosshair', motion: 'auto' };
+        var s = d;
         try {
-          var saved = localStorage.getItem('theme');
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light');
-        } catch (error) {
-          document.documentElement.dataset.theme = 'light';
-        }
+          var raw = JSON.parse(localStorage.getItem('portfolio-settings'));
+          if (raw && typeof raw === 'object') {
+            s = {
+              theme: raw.theme || d.theme,
+              accent: raw.accent || d.accent,
+              backdrop: raw.backdrop || d.backdrop,
+              cursor: raw.cursor || d.cursor,
+              motion: raw.motion || d.motion
+            };
+          }
+        } catch (e) {}
+        var m = function (q) { try { return window.matchMedia(q).matches; } catch (e) { return false; } };
+        var el = document.documentElement;
+        el.dataset.theme = s.theme === 'auto' ? (m('(prefers-color-scheme: dark)') ? 'dark' : 'light') : s.theme;
+        el.dataset.motion = s.motion === 'auto' ? (m('(prefers-reduced-motion: reduce)') ? 'off' : 'full') : s.motion;
+        el.dataset.accent = s.accent;
+        el.dataset.backdrop = s.backdrop;
+        el.dataset.cursor = s.cursor;
       })();
     </script>
   </head>

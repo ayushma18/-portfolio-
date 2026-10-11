@@ -1,42 +1,18 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import {
-  FaCheckCircle,
-  FaEnvelope,
-  FaGithub,
-  FaLinkedin,
-  FaMapMarkerAlt,
-} from 'react-icons/fa';
 import { profile, socials } from '../data/profile';
 import Section from './Section';
 import styles from './Contact.module.css';
 
 const channels = [
+  { label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
   {
-    icon: <FaEnvelope />,
-    label: 'Email',
-    value: profile.email,
-    href: `mailto:${profile.email}`,
-  },
-  {
-    icon: <FaLinkedin />,
     label: 'LinkedIn',
     value: 'ayushma-pudasaini',
     href: socials.linkedin,
     external: true,
   },
-  {
-    icon: <FaGithub />,
-    label: 'GitHub',
-    value: 'ayushma18',
-    href: socials.github,
-    external: true,
-  },
-  {
-    icon: <FaMapMarkerAlt />,
-    label: 'Location',
-    value: profile.location,
-  },
+  { label: 'GitHub', value: 'ayushma18', href: socials.github, external: true },
+  { label: 'Location', value: profile.location },
 ];
 
 const isLocal = () =>
@@ -79,32 +55,18 @@ const Contact = () => {
   return (
     <Section
       id="contact"
+      index="07"
       tone="subtle"
       eyebrow="Contact"
       title="Get in touch"
       lead="Open to internships, research collaborations and interesting problems. The fastest route is email."
     >
       <div className={styles.layout}>
-        <motion.ul
-          className={styles.channels}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          viewport={{ once: true, margin: '-80px' }}
-        >
-          {channels.map((channel) => {
-            const content = (
-              <>
-                <span className={styles.channelIcon}>{channel.icon}</span>
-                <span className={styles.channelText}>
-                  <span className={styles.channelLabel}>{channel.label}</span>
-                  <span className={styles.channelValue}>{channel.value}</span>
-                </span>
-              </>
-            );
-
-            return (
-              <li key={channel.label} className={styles.channel}>
+        <dl className={styles.channels}>
+          {channels.map((channel) => (
+            <div key={channel.label} className={styles.channel}>
+              <dt className={styles.channelLabel}>{channel.label}</dt>
+              <dd className={styles.channelValue}>
                 {channel.href ? (
                   <a
                     href={channel.href}
@@ -113,29 +75,23 @@ const Contact = () => {
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
                   >
-                    {content}
+                    {channel.value}
                   </a>
                 ) : (
-                  <div className={styles.channelLink}>{content}</div>
+                  channel.value
                 )}
-              </li>
-            );
-          })}
-        </motion.ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
 
-        <motion.div
-          className={styles.formCard}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.1 }}
-          viewport={{ once: true, margin: '-80px' }}
-        >
+        <div className={styles.formWrap}>
           {status === 'sent' ? (
             <div className={styles.success} role="status">
-              <FaCheckCircle className={styles.successIcon} aria-hidden="true" />
-              <h3 className={styles.successTitle}>Message sent</h3>
+              <p className={styles.successLabel}>Sent</p>
+              <h3 className={styles.successTitle}>Thanks — that reached me.</h3>
               <p className={styles.successBody}>
-                Thanks for reaching out — I&apos;ll reply as soon as I can.
+                I&apos;ll reply as soon as I can.
               </p>
               <button
                 type="button"
@@ -172,7 +128,6 @@ const Contact = () => {
                   type="text"
                   required
                   autoComplete="name"
-                  placeholder="Your name"
                 />
               </div>
 
@@ -184,7 +139,6 @@ const Contact = () => {
                   type="email"
                   required
                   autoComplete="email"
-                  placeholder="you@example.com"
                 />
               </div>
 
@@ -195,7 +149,6 @@ const Contact = () => {
                   name="message"
                   rows="5"
                   required
-                  placeholder="What would you like to talk about?"
                 />
               </div>
 
@@ -215,7 +168,7 @@ const Contact = () => {
               </button>
             </form>
           )}
-        </motion.div>
+        </div>
       </div>
     </Section>
   );

@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaBars, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { navLinks, profile, socials } from '../data/profile';
-import ThemeToggle from './ThemeToggle';
+import useFocusTrap from '../hooks/useFocusTrap';
+import ControlPanel from './ControlPanel';
+import ScrollProgress from './ScrollProgress';
 import styles from './Nav.module.css';
 
 const Nav = () => {
@@ -10,6 +11,8 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState('home');
   const toggleRef = useRef(null);
+  const headerRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
@@ -44,47 +47,48 @@ const Nav = () => {
     toggleRef.current?.focus();
   }, []);
 
-  /* Escape closes the mobile menu; lock scrolling while it is open. */
-  useEffect(() => {
-    if (!isMenuOpen) return undefined;
+  /* The trap covers the whole header, not just the open panel, so the close
+     button and the theme toggle beside it stay reachable by keyboard. The
+     desktop links are display:none at this breakpoint and drop out on their
+     own. Focus lands on the first menu link. */
+  useFocusTrap({
+    isOpen: isMenuOpen,
+    containerRef: headerRef,
+    initialFocusRef: menuRef,
+    onClose: closeMenu,
+  });
 
-    const onKeyDown = (event) => {
-      if (event.key === 'Escape') closeMenu();
-    };
-
-    document.addEventListener('keydown', onKeyDown);
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [isMenuOpen, closeMenu]);
-
-  const renderLink = (link, onClick) => (
-    <a
-      key={link.id}
-      href={`#${link.id}`}
-      onClick={onClick}
-      className={activeId === link.id ? styles.active : undefined}
-      aria-current={activeId === link.id ? 'true' : undefined}
-    >
-      {link.label}
-    </a>
-  );
+  const renderLink = (link, index, onClick) => {
+    const isActive = activeId === link.id;
+    return (
+      <a
+        key={link.id}
+        href={`#${link.id}`}
+        onClick={onClick}
+        className={isActive ? styles.active : undefined}
+        aria-current={isActive ? 'true' : undefined}
+      >
+        <span className={styles.linkNum} aria-hidden="true">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        {link.label}
+      </a>
+    );
+  };
 
   return (
-    <header className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
-      <a href="#home" className={styles.logo}>
-        <span className={styles.logoMark} aria-hidden="true">
-          AP
-        </span>
-        <span className={styles.logoText}>{profile.name}</span>
+    <header
+      ref={headerRef}
+      className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}
+    >
+      <ScrollProgress />
+
+      <a href="#home" className={styles.logo} data-cursor-label="Top">
+        {profile.name}
       </a>
 
       <nav className={styles.links} aria-label="Primary">
-        {navLinks.map((link) => renderLink(link))}
+        {navLinks.map((link, i) => renderLink(link, i))}
       </nav>
 
       <div className={styles.actions}>
@@ -106,7 +110,7 @@ const Nav = () => {
         >
           <FaLinkedin />
         </a>
-        <ThemeToggle />
+        <ControlPanel />
         <button
           ref={toggleRef}
           type="button"
@@ -114,27 +118,17 @@ const Nav = () => {
           onClick={() => setIsMenuOpen((open) => !open)}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          data-cursor-label={isMenuOpen ? 'Close' : 'Menu'}
         >
-          {isMenuOpen ? <FaTimes /> : <FaBars />}
+          {isMenuOpen ? 'Close' : 'Menu'}
         </button>
       </div>
 
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.nav
-            id="mobile-menu"
-            className={styles.mobileMenu}
-            aria-label="Mobile"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2 }}
-          >
-            {navLinks.map((link) => renderLink(link, closeMenu))}
-          </motion.nav>
-        )}
-      </AnimatePresence>
+      {isMenuOpen && (
+        <nav ref={menuRef} id="mobile-menu" className={styles.mobileMenu} aria-label="Mobile">
+          {navLinks.map((link, i) => renderLink(link, i, closeMenu))}
+        </nav>
+      )}
     </header>
   );
 };

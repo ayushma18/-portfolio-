@@ -1,224 +1,363 @@
+/* Filters ----------------------------------------------------------------- */
+
 .filters {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  align-items: baseline;
+  gap: var(--space-5);
   margin-bottom: var(--space-6);
 }
 
-.filterBtn {
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  background: var(--bg-elevated);
-  color: var(--text-muted);
-  font-size: var(--text-sm);
+.filterLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   font-weight: 500;
-  transition: all var(--dur-fast) var(--ease);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+}
+
+.filterList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 .filterBtn:hover {
-  border-color: var(--brand-500);
-  color: var(--brand-500);
+  color: var(--ink);
 }
 
+/* Active state is a rule beneath the label, not a filled pill. */
 .filterActive {
-  background: var(--brand-500);
-  border-color: var(--brand-500);
-  color: var(--text-on-brand);
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--marker);
 }
 
-.filterActive:hover {
-  color: var(--text-on-brand);
+.filterCount {
+  font-size: 0.6875rem;
+  color: var(--marker);
+  font-variant-numeric: tabular-nums;
 }
 
-.grid {
+/* Index ------------------------------------------------------------------- */
+
+.index {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.row {
+  border-bottom: 1px solid var(--rule);
+}
+
+.rowHeading {
+  font: inherit;
+  letter-spacing: normal;
+}
+
+.trigger {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  gap: var(--space-5);
+  grid-template-columns: 3.25rem minmax(0, 1fr) auto 2.5rem;
+  align-items: baseline;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-5) 0;
+  text-align: left;
+  transition: background-color var(--dur) var(--ease);
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: border-color var(--dur) var(--ease),
-    transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+.trigger:hover .rowTitle,
+.triggerOpen .rowTitle {
+  color: var(--marker);
 }
 
-.card:hover {
-  border-color: var(--brand-500);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+.trigger:hover .num {
+  color: var(--marker);
 }
 
-/* Cover art is generated from the project's own accent pair, so there are no
-   external image requests and nothing can 404. */
-.cover {
-  position: relative;
-  height: 132px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-
-.cover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.22) 1px,
-    transparent 1px
-  );
-  background-size: 14px 14px;
-  opacity: 0.6;
-}
-
-.coverMark {
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-display);
-  font-size: 2.75rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.coverCategory {
-  position: absolute;
-  z-index: 1;
-  left: var(--space-4);
-  bottom: var(--space-3);
-  padding: 2px var(--space-3);
-  border-radius: var(--radius-full);
-  background: rgba(0, 0, 0, 0.32);
-  color: #fff;
+.num {
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 500;
+  letter-spacing: var(--track-label);
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--dur) var(--ease);
 }
 
-.body {
+.rowMain {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  padding: var(--space-5);
+  gap: var(--space-1);
+  min-width: 0;
 }
 
-.meta {
-  display: flex;
+.rowTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-variation-settings: 'opsz' 72;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: var(--track-heading);
+  transition: color var(--dur) var(--ease);
+}
+
+.rowSubtitle {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
+
+.rowMeta {
+  display: inline-flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .year {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--text-faint);
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
 }
 
+/* Status carries a word, never colour alone. */
 .status {
-  padding: 1px var(--space-3);
-  border-radius: var(--radius-full);
-  background: color-mix(in srgb, var(--accent-500) 16%, transparent);
-  color: var(--accent-600);
-  font-size: var(--text-xs);
-  font-weight: 600;
+  padding: var(--space-1) var(--space-2);
+  background: var(--marker-wash);
+  color: var(--marker-deep);
 }
 
-.cardTitle {
-  font-size: var(--text-lg);
-  color: var(--text);
+/* A plus that becomes a minus — the state is in the shape, not the colour. */
+.toggle {
+  position: relative;
+  justify-self: end;
+  width: 14px;
+  height: 14px;
+  align-self: center;
 }
 
-.subtitle {
-  margin-top: var(--space-1);
-  font-size: var(--text-sm);
-  color: var(--brand-500);
-  font-weight: 500;
+.toggleBar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--ink-muted);
+  transform: translateY(-50%);
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+.toggleBarV {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.triggerOpen .toggleBar {
+  background: var(--marker);
+}
+
+.triggerOpen .toggleBarV {
+  transform: translateY(-50%) rotate(0deg);
+  opacity: 0;
+}
+
+/* Panel ------------------------------------------------------------------- */
+
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  /* Visibility flips only after the collapse finishes, so the content is out
+     of the tab order when shut without cutting the animation short. */
+  transition: grid-template-rows 320ms var(--ease), visibility 0s linear 320ms;
+}
+
+.panel[data-open='true'] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 320ms var(--ease), visibility 0s;
+}
+
+.panelInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.panelInner {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) 15rem;
+  /* The column gap must match the trigger's, or the description sits out of
+     alignment with the title directly above it. */
+  column-gap: var(--space-4);
+  row-gap: var(--space-5);
+  padding: 0 0 var(--space-6);
+}
+
+.panelSide {
+  padding-left: var(--space-4);
+}
+
+.panelBody {
+  grid-column: 2;
 }
 
 .description {
-  margin-top: var(--space-3);
-  font-size: var(--text-sm);
+  max-width: 60ch;
+  color: var(--ink-muted);
   line-height: 1.7;
-  color: var(--text-muted);
+}
+
+.impact {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--marker);
+}
+
+.impactLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--marker-deep);
+  flex-shrink: 0;
+}
+
+.impactText {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-variation-settings: 'opsz' 32;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.panelSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.sideLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 .tech {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin: var(--space-5) 0 var(--space-5);
 }
 
-.techTag {
-  padding: 2px var(--space-3);
-  border-radius: var(--radius-sm);
-  background: var(--bg-inset);
-  color: var(--text-muted);
+.tech li {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--rule-strong);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
+  color: var(--ink-muted);
 }
 
-.repoLink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: auto;
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--border);
-  color: var(--text);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  transition: color var(--dur-fast) var(--ease);
-}
-
-.repoLink:hover {
-  color: var(--brand-500);
-}
-
-.footer {
-  margin-top: var(--space-7);
-  text-align: center;
-}
-
+.repo,
 .allLink {
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-3) var(--space-6);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  background: var(--bg-elevated);
-  color: var(--text);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  transition: all var(--dur-fast) var(--ease);
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink);
+  box-shadow: inset 0 -1px 0 var(--rule-strong);
+  transition: color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
+.repo:hover,
 .allLink:hover {
-  border-color: var(--brand-500);
-  color: var(--brand-500);
-  transform: translateY(-2px);
+  color: var(--marker);
+  box-shadow: inset 0 -1px 0 var(--marker);
 }
 
-/* Visually hidden but announced by screen readers. */
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.repoArrow {
+  transition: transform var(--dur) var(--ease);
+}
+
+.repo:hover .repoArrow,
+.allLink:hover .repoArrow {
+  transform: translateX(4px);
+}
+
+.allLink {
+  margin-top: var(--space-6);
+}
+
+/* Responsive -------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .panelInner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .panelBody {
+    grid-column: 1;
+  }
 }
 
 @media (max-width: 640px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .filters {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .trigger {
+    grid-template-columns: 2.5rem minmax(0, 1fr) 1.5rem;
+    grid-template-areas:
+      'num  main toggle'
+      '.    meta meta';
+    gap: var(--space-2) var(--space-3);
+    padding: var(--space-4) 0;
+  }
+
+  .num { grid-area: num; }
+  .rowMain { grid-area: main; }
+  .toggle { grid-area: toggle; }
+
+  .rowMeta {
+    grid-area: meta;
+    margin-top: var(--space-2);
+  }
+
+  .rowTitle {
+    font-size: var(--text-xl);
+  }
+
+  .impact {
+    flex-direction: column;
+    gap: var(--space-1);
   }
 }
