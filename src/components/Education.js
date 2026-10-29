@@ -7,7 +7,7 @@ import styles from './Education.module.css';
 const Education = () => (
   <Section
     id="education"
-    index="05"
+    index="07"
     tone="subtle"
     eyebrow="Background"
     title="Education & affiliations"

@@ -43,7 +43,7 @@ const Projects = () => {
       index="01"
       eyebrow="Work"
       title="Selected projects"
-      lead="Eight builds, each linked to its source. Open an entry to read what it does and what it took."
+      lead="Builds across machine learning, full-stack and systems — each linked to its source. Open an entry to read what it does and what it took."
     >
       <div className={styles.filters}>
         <span className={styles.filterLabel} id="filter-label">

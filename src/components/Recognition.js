@@ -27,7 +27,7 @@ const Recognition = () => {
   return (
     <Section
       id="recognition"
-      index="06"
+      index="08"
       eyebrow="Recognition"
       title="Awards & certificates"
     >

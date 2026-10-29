@@ -7,16 +7,17 @@
 
 export const profile = {
   name: 'Ayushma Pudasaini',
-  role: 'Computer Engineering Undergraduate',
-  tagline: 'Deep learning, model interpretability and full-stack systems.',
+  role: 'Software Engineer · Hand Model · Content Creator',
+  tagline: 'Deep-learning and full-stack engineering — alongside jewelry hand modeling and content creation.',
   location: 'Lalitpur, Nepal',
   /* Shown in the hero masthead. Kept here so the claim is edited in one
      place when it stops being true. */
-  availability: 'Open to internships & research collaborations',
+  availability: 'Open to internships, research & modeling work',
   email: '079bct030.ayushma@pcampus.edu.np',
   bio: [
-    "I'm a fourth-year Computer Engineering undergraduate at Pulchowk Campus, IOE, Tribhuvan University.",
-    'My work sits between machine learning research and the engineering needed to make it usable — training and probing models on one side, shipping the APIs and interfaces around them on the other.',
+    "I'm a Computer Engineering undergraduate at Pulchowk Campus, IOE, Tribhuvan University.",
+    'My engineering work sits between machine-learning research and the systems needed to make it usable — training and probing models on one side, shipping the APIs and interfaces around them on the other.',
+    'Outside of code I work as a jewelry hand model and a content creator, producing short-form video and photography for brands and for my own channels.',
   ],
   quote: "I don't give up when I fail.",
 };
@@ -24,6 +25,8 @@ export const profile = {
 export const socials = {
   github: 'https://github.com/ayushma18',
   linkedin: 'https://www.linkedin.com/in/ayushma-pudasaini-443677276/',
+  tiktok: 'https://www.tiktok.com/@anayrajewels',
+  instagram: 'https://www.instagram.com/ayusha.020/',
 };
 
 /**
@@ -37,15 +40,18 @@ export const navLinks = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
+  { id: 'hand-modeling', label: 'Modeling' },
+  { id: 'content', label: 'Content' },
   { id: 'education', label: 'Education' },
-  { id: 'recognition', label: 'Recognition' },
   { id: 'contact', label: 'Contact' },
 ];
 
-export const stats = [
-  { value: '2027', label: 'Expected graduation' },
-  { value: '8', label: 'Featured projects' },
-  { value: '82.5%', label: 'Best model accuracy' },
+/* The three things this site is actually about, shown in the hero in place of
+   vanity metrics. Edited here so the framing lives in one file. */
+export const disciplines = [
+  { value: 'Engineering', label: 'ML & full-stack' },
+  { value: 'Hand model', label: 'Jewelry & beauty' },
+  { value: 'Creator', label: 'TikTok & Instagram' },
 ];
 
 export const focusAreas = [
@@ -175,6 +181,66 @@ export const projects = [
     tech: ['React', 'Django REST', 'JavaScript'],
     repo: 'https://github.com/ayushma18/agarasar-web',
   },
+  {
+    title: 'Maze Solver',
+    subtitle: 'Pathfinding visualiser in React',
+    category: 'Full-Stack',
+    year: '2025',
+    description:
+      'An interactive maze solver built in React that visualises a pathfinding algorithm working its way from the start cell to the goal.',
+    tech: ['React', 'JavaScript'],
+    repo: 'https://github.com/ayushma18/maze-solver',
+  },
+  {
+    title: 'ML Model Serving API',
+    subtitle: 'FastAPI inference service',
+    category: 'Machine Learning',
+    year: '2025',
+    description:
+      'Serves a trained machine-learning model behind a FastAPI endpoint, exposing predictions over a simple REST interface.',
+    tech: ['Python', 'FastAPI', 'Machine Learning'],
+    repo: 'https://github.com/ayushma18/ml_model',
+  },
+  {
+    title: 'Alumni Tracker',
+    subtitle: 'Alumni directory web app',
+    category: 'Full-Stack',
+    year: '2025',
+    description:
+      'A web application for recording and connecting alumni, built with JavaScript.',
+    tech: ['JavaScript', 'Web app'],
+    repo: 'https://github.com/ayushma18/Alumni-tracker',
+  },
+  {
+    title: 'Garden of Dreams',
+    subtitle: '3D scene in the browser',
+    category: 'Full-Stack',
+    year: '2025',
+    description:
+      'A 3D interactive rendering of the Garden of Dreams, built to run in the browser.',
+    tech: ['JavaScript', '3D', 'WebGL'],
+    repo: 'https://github.com/ayushma18/Garden_of-dreams',
+  },
+  {
+    title: 'Rock Paper Scissors',
+    subtitle: 'Browser game',
+    category: 'Full-Stack',
+    year: '2025',
+    description:
+      'A classic rock-paper-scissors game built from scratch with HTML, Tailwind CSS and vanilla JavaScript.',
+    tech: ['HTML5', 'Tailwind CSS', 'JavaScript'],
+    repo: 'https://github.com/ayushma18/Scissor-Paper-Rock',
+  },
+  {
+    title: 'Online Quiz',
+    subtitle: 'Quiz application',
+    category: 'Full-Stack',
+    year: '2025',
+    description:
+      'A quiz application that serves questions and scores responses, written in Python.',
+    tech: ['Python'],
+    repo: 'https://github.com/ayushma18/online_quiz',
+  },
 ];
 
 export const skillGroups = [
@@ -246,6 +312,26 @@ export const skillGroups = [
 ];
 
 export const experience = [
+  {
+    title: 'Software Engineer',
+    organization: 'U.S.-based technology company',
+    /* TODO (Ayushma): fill in the real dates below. */
+    period: '[Start] — [Present]',
+    description:
+      'Software engineering for a company based in the United States. [Fill in: what you build, the stack you use, and one concrete result or responsibility.]',
+    tags: ['Software engineering', 'Remote'],
+    kind: 'work',
+  },
+  {
+    title: 'Full-Stack Web Developer · Intern',
+    organization: 'Alxero',
+    /* TODO (Ayushma): fill in the real dates below. */
+    period: '[Start] — [End]',
+    description:
+      'Full-stack web development internship — building and shipping web features end to end. [Fill in: what you built, the stack, and one concrete result.]',
+    tags: ['Full-stack', 'Web development', 'Internship'],
+    kind: 'work',
+  },
   {
     title: 'Seeds for the Future',
     organization: 'Huawei Technologies',
@@ -329,3 +415,62 @@ export const recognition = [
     document: '/assets/codeit_certificate.pdf',
   },
 ];
+
+/**
+ * Hand modeling. `shots` are frames from jewelry content the hands feature in,
+ * cropped from the source videos. Each file lives in /public/assets/hand.
+ */
+export const handModeling = {
+  intro:
+    'I work as a jewelry hand model — my hands feature in product and campaign content for brands, including reels published on TikTok as @anayrajewels. Ring detail, framing and steady holds for close-up beauty shots.',
+  featured: {
+    label: 'Featured on TikTok',
+    handle: '@anayrajewels',
+    url: 'https://www.tiktok.com/@anayrajewels',
+  },
+  shots: [
+    {
+      src: '/assets/hand/ring-emerald.webp',
+      alt: 'Hand modeling a gold emerald halo ring in natural light',
+      caption: 'Emerald halo ring',
+    },
+    {
+      src: '/assets/hand/ring-starburst.webp',
+      alt: 'Hand with a pink manicure modeling a diamond starburst ring',
+      caption: 'Diamond starburst ring',
+    },
+    {
+      src: '/assets/hand/ring-solitaire.webp',
+      alt: 'Hand modeling a gold diamond cluster ring',
+      caption: 'Diamond cluster ring',
+    },
+    {
+      src: '/assets/hand/ring-cluster.webp',
+      alt: 'Hand modeling a gold and opal ring in warm sunlight',
+      caption: 'Opal accent ring',
+    },
+  ],
+};
+
+/**
+ * Content creation. Links only — no scraped media — so every item points at
+ * the live channel where the work actually lives.
+ */
+export const contentCreation = {
+  intro:
+    'Beyond engineering I create content across social platforms — short-form video and photography, from jewelry and beauty to everyday life.',
+  platforms: [
+    {
+      name: 'TikTok',
+      handle: '@anayrajewels',
+      url: 'https://www.tiktok.com/@anayrajewels',
+      note: 'Jewelry hand-modeling reels and product close-ups.',
+    },
+    {
+      name: 'Instagram',
+      handle: '@ayusha.020',
+      url: 'https://www.instagram.com/ayusha.020/',
+      note: 'Photography and lifestyle content.',
+    },
+  ],
+};

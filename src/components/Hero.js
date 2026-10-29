@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaArrowRight, FaGithub, FaLinkedin } from 'react-icons/fa';
-import { profile, socials, stats } from '../data/profile';
+import { profile, socials, disciplines } from '../data/profile';
 import { useSettings } from '../theme/ThemeProvider';
 import useMagnetic from '../hooks/useMagnetic';
 import portrait from '../images/ayushma-portrait.webp';
@@ -121,12 +121,12 @@ const Hero = () => {
         </motion.figure>
       </div>
 
-      {/* Specification strip — the three facts worth reading at a glance. */}
+      {/* Disciplines strip — what this site is about, at a glance. */}
       <dl className={`${styles.spec} ${styles.reveal}`} style={step(4)}>
-        {stats.map((stat) => (
-          <div key={stat.label} className={styles.specItem}>
-            <dt className={styles.specLabel}>{stat.label}</dt>
-            <dd className={styles.specValue}>{stat.value}</dd>
+        {disciplines.map((item) => (
+          <div key={item.value} className={styles.specItem}>
+            <dt className={styles.specLabel}>{item.label}</dt>
+            <dd className={styles.specValue}>{item.value}</dd>
           </div>
         ))}
       </dl>

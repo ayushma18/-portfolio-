@@ -1,0 +1,173 @@
+/* Featured channel pill ---------------------------------------------------- */
+
+.featured {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  margin-bottom: var(--space-6);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--rule-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.featured:hover {
+  color: var(--marker);
+  border-color: var(--marker);
+}
+
+.featuredLabel {
+  color: var(--ink-faint);
+}
+
+.featuredHandle {
+  color: var(--marker-deep);
+}
+
+.featured svg {
+  width: 1em;
+  height: 1em;
+}
+
+.featuredArrow {
+  transition: transform var(--dur) var(--ease);
+}
+
+.featured:hover .featuredArrow {
+  transform: translateX(3px);
+}
+
+/* Gallery grid ------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  border-top: 1px solid var(--rule-strong);
+  padding-top: var(--space-6);
+}
+
+.cell {
+  min-width: 0;
+}
+
+.tile {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.tile:hover {
+  border-color: var(--marker);
+  transform: translateY(-3px);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  /* A hairline between image and caption, since there is no shadow. */
+  border-bottom: 1px solid var(--rule);
+}
+
+.caption {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
+
+.captionNum {
+  color: var(--marker-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Lightbox ----------------------------------------------------------------- */
+
+@keyframes overlay-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dialog-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+.overlay {
+  animation: overlay-in 180ms var(--ease) both;
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+  background: rgba(9, 8, 6, 0.78);
+  backdrop-filter: blur(3px);
+}
+
+.dialog {
+  animation: dialog-in 220ms var(--ease) both;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(520px, 100%);
+  max-height: 90vh;
+  padding: var(--space-3);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+}
+
+.dialogImage {
+  display: block;
+  max-width: 100%;
+  max-height: 76vh;
+  object-fit: contain;
+}
+
+.dialogCaption {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.closeBtn {
+  position: absolute;
+  top: calc(-1 * var(--space-7));
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--on-ink);
+  transition: color var(--dur) var(--ease);
+}
+
+.closeBtn:hover {
+  color: var(--marker);
+}
+
+/* Responsive --------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 420px) {
+  .closeBtn {
+    top: calc(-1 * var(--space-6));
+  }
+}

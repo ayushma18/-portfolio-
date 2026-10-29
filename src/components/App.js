@@ -12,6 +12,8 @@ import About from './About';
 import Projects from './Projects';
 import Skills from './Skills';
 import Experience from './Experience';
+import HandModeling from './HandModeling';
+import ContentCreation from './ContentCreation';
 import Education from './Education';
 import Recognition from './Recognition';
 import Contact from './Contact';
@@ -54,6 +56,8 @@ const Shell = () => {
         <About />
         <Skills />
         <Experience />
+        <HandModeling />
+        <ContentCreation />
         <Education />
         <Recognition />
         <Contact />

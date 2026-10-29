@@ -7,9 +7,9 @@ const Experience = () => (
   <Section
     id="experience"
     index="04"
-    eyebrow="Involvement"
-    title="Beyond the coursework"
-    lead="Programmes, competitions and campus work."
+    eyebrow="Experience"
+    title="Work & involvement"
+    lead="Roles I've held, alongside programmes, competitions and campus work."
   >
     <ol className={styles.list}>
       {experience.map((entry, i) => (
@@ -19,6 +19,7 @@ const Experience = () => (
             {entry.kind === 'programme' && (
               <span className={styles.flag}>Selected</span>
             )}
+            {entry.kind === 'work' && <span className={styles.flag}>Role</span>}
           </p>
 
           <div className={styles.body}>
