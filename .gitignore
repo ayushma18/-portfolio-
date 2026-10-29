@@ -65,8 +65,9 @@ jspm_packages/
 dist
 
 # Gatsby files
+# NOTE: `public` is intentionally NOT ignored — this is a Create React App
+# project, where public/ holds index.html and static assets that must ship.
 .cache/
-public
 
 # Vuepress build output
 .vuepress/dist
